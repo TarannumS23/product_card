@@ -5,74 +5,102 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        body{
+            background-color: #d7eafd;
+        }
         .container{
             border: 1px solid black;
-            width: 500px;
+            width: 400px;
             margin: 0 auto;
             border-radius: 5px;
-            padding: 10px;
-            box-shadow: 0 0 10px grey;
+            padding: 10px 20px;
+            box-shadow: 0 0 10px #3893ee;
             margin-top: 50px;
+            background-color: white;
         }
-        .heading{
-            text-align: center;
-            color: #398be3;
-        }
-        .dice{
+        
+        .product{
             height: 200px;
             display: block;
-            margin: 0 auto;
+            margin: 20px auto;
         }
-        .btn-roll{
-            display: block;
-            margin: 0 auto;
-            font-size: 30px;
-            margin-top: 20px;
-            border-radius: 10px;
-            padding: 5px 30px;
-            background-color: #398be3;
-            color: white;
-            border: none;
-            cursor: pointer;
+        .btn-add-cart{
+           font-size: 20px;
+           padding: 10px 20px ;
+           display: block;
+           margin: 20px auto;
+           background-color:#0477ea ;
+           border: none;
+           border-radius: 15px;
+           color: white;
+           cursor: pointer;
+        }
+        .btn-quantity{
+            height: 35px;
+        }
+        .quantity-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .quantity-text{
+            font-size: 40px;
+            margin: 0 50px;
+        }
+        @media screen and (max-width: 500px){
+            .container{
+                width: 80%;
+            }
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1 class="heading">Dice Roller</h1>
-        <img src="img/casino.png" class="dice" id="dice-img">
+        <img src="bag.png" class="product" id="product">
+        <h1 class="product-name">School Bag</h1>
+        <p>
+            Durable and spacious school bag with multiple compartments and a stylish design perfect 
+            for carrying books and essentials comfortably all day.
+        </p>
 
-        <button class="btn-roll" onclick="rollDice()">Roll Dice</button>
+        <h2>Price: ₹950/- </h2>
+
+        <div class="quantity-container">
+            <img src="minus.png" class="btn-quantity" id="minus" onclick="decrease()">
+
+            <span class="quantity-text" id="quantity-text">1</span>
+
+            <img src="plus.png" class="btn-quantity" id="plus" onclick="incease()">
+        </div>
+
+        <button class="btn-add-cart">
+            <b>Add to Cart</b>
+        </button>
     </div>
     <script>
-        function rollDice() {
-        const min = 1;
-        const max = 6;
+        const quantityText = document.getElementById('quantity-text');
 
-        const random = Math.floor(Math.random() * (max - min + 1)) + min ;
+        function incease(){
+            let quantity = parseInt(quantityText.innerText);
+            if(quantity < 10){
+            quantityText.innerText = ++quantity;
+            }
+            else{
+                alert("You can't add more than 10 items at a time");
+            }
+        }
 
-        const diceimg = document.getElementById("dice-img");
-
-        if(random==1){
-            diceimg.src = './img/one.png';
+        function decrease(){
+            let quantity = parseInt(quantityText.innerText);
+            if(quantity > 1){
+                quantityText.innerText = --quantity;
+            }
+            else{
+                alert("Quantity can't be less than 1");
+            }
+            
         }
-        else if(random==2){
-            diceimg.src = './img/two.png';
-        }
-        else if(random==3){
-            diceimg.src = './img/three.png';
-        }
-        else if(random==4){
-            diceimg.src = './img/four (1).png';
-        }
-        else if(random==5){
-            diceimg.src = './img/five.png';
-        }
-        else if(random==6){
-            diceimg.src = './img/six.png';
-        }
-        }   
         
     </script>
 </body>
